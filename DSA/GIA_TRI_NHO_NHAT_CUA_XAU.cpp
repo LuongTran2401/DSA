@@ -1,33 +1,33 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define mod 1000000007
 
-int main(){
-    ios_base::sync_with_stdio(0); 
-    cin.tie(0);
-    int t; cin>>t;
-    while(t--){
-        int k; cin>>k;
-        string s; cin>>s;
-        int f[150]={0};
-        for(int i=0;i<s.size();i++){
-            f[s[i]]++;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        string s;
+        int k;
+        cin>>k>>s;
+        ll ans=0;
+        map<char,int>mp;
+        for(char c:s)mp[c]++;
+        vector<int>v;
+        for(auto it:mp){
+          v.push_back(it.second);
         }
-        priority_queue<int, vector<int>, less<int>> q;
-        for(int i=30;i<150;i++){
-            if(f[i]) q.push(f[i]);
+        sort(v.begin(),v.end(),greater<int>());
+        while(k--){
+          v[0]-=1;
+          sort(v.begin(),v.end(),greater<int>());
         }
-        while(k){
-            int tmp = q.top(); q.pop();
-            tmp--;
-            if(tmp) q.push(tmp);
-            k--;
+        for(int x:v){
+          ans+=1ll*x*x;
         }
-        long res=0;
-        while(q.size()){
-            res+= pow(q.top(),2);
-            q.pop();
-        }
-        cout<<res<<endl;
+        cout<<ans<<"\n";
     }
     return 0;
 }

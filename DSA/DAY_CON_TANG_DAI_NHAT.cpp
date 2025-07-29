@@ -1,23 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define mod 1000000007
 
 int main(){
-	int T;
-	cin>>T;
-	while(T--){
-    	int n;
-		cin>>n;
-    	int a[n];
-    	int f[n]={0};
-    	for(int i=0;i<n;i++) cin>>a[i];
-    	int res=0;
-    	for(int i=1;i<n;i++){
-        	for(int j=0;j<i;j++){
-            	if(a[j]<a[i])
-               		f[i]=max(f[i],f[j]+1);
-        	}
-        	res=max(res,f[i]);
-    	}
-    	cout<<res+1;
+	int t;
+	cin>>t;
+	while(t--){
+	int n;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)cin>>a[i];
+	vector<int>v(n+1,1);
+	for(int i=0;i<n;i++)
+	{
+	 for(int j=0;j<i;j++){
+	 	if(a[i]>a[j]){
+	 		v[i]=max(v[i],1+v[j]);
+		 }
+	 }
+	 
 	}
+	cout<<*max_element(v.begin(),v.end())<<"\n";
+}
+ return 0;
 }

@@ -1,28 +1,28 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#define ll long long
+
 using namespace std;
 
-int solve(int N, int X, int Y, int Z) {
-    vector<int> dp(N + 1, 1e9);
-    dp[0] = 0;
-    dp[1] = X;
-    for (int i = 2; i <= N; ++i) {
-        dp[i] = dp[i - 1] + X;
-        if (i % 2 == 0) {
-            dp[i] = min(dp[i], dp[i / 2] + Z);
-        } else {
-            dp[i] = min(dp[i], dp[(i - 1) / 2] + Z + X);
-        }
-    }
-    return dp[N];
-}
 
-int main() {
-    int T; 
-	cin >> T;
-    while (T--) {
-        int N, X, Y, Z;
-        cin >> N >> X >> Y >> Z;
-        cout << solve(N, X, Y, Z) << '\n';
+int main()
+{
+    int t; cin>>t;
+    while(t--)
+    {
+        int n,ins,del,cop;
+        cin>>n>>ins>>del>>cop;
+
+        int d[n+1];
+        d[1] = ins;
+        for(int i=2; i<=n; ++i)
+        {
+            d[i] = d[i-1] + ins;
+            if(i%2)
+                d[i] = min(d[i], d[i/2+1]+cop+del);
+            else
+                d[i] = min(d[i], d[i/2]+cop);
+        }
+
+        cout<<d[n]<<"\n";
     }
-    return 0;
 }
